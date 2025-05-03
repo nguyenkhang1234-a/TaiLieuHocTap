@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang chủ - Hệ thống Ngân hàng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e9f5ff, #ffffff);
+            color: #1a1a1a;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(to right, #004e92, #000428);
+            padding: 40px 20px;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        header h1 {
+            font-size: 36px;
+            font-weight: 600;
+        }
+        main {
+            padding: 50px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+        }
+        .card a {
+            text-decoration: none;
+            color: #004e92;
+            font-size: 20px;
+            font-weight: 600;
+            display: block;
+        }
+        .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌐 Hệ thống Quản lý Ngân hàng</h1>
+    </header>
+    <main>
+        <div class="menu">
+            <div class="card">
+                <div class="icon">🔍</div>
+                <a href="/taikhoan">Xem Thông Tin Tài Khoản</a>
+            </div>
+            <div class="card">
+                <div class="icon">💰</div>
+                <a href="/giaodich">Thêm Giao Dịch</a>
+            </div>
+            <div class="card">
+                <div class="icon">📄</div>
+                <a href="/phatsinh">Xóa Thông Tin Phát Sinh</a>
+            </div>
+            <div class="card">
+                <div class="icon">🏢</div>
+                <a href="/chinhanh">Chi Nhánh</a>
+            </div>
+            <div class="card">
+                <div class="icon">🔄</div>
+                <a href="/capnhat">Cập Nhật Thông Tin</a>
+            </div>
+            <div class="card">
+                <div class="icon">📊</div>
+                <a href="/trungbinhcao">Giao Dịch Trung Bình</a>
+            </div>            
+        </div>
+    </main>
+    <footer>
+        &copy; 2025 Ngân hàng Taho. All rights reserved.
+    </footer>
+</body>
+</html>

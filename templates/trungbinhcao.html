@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tài khoản giao dịch cao</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f3faff, #ffffff);
+            min-height: 100vh;
+            color: #1a1a1a;
+        }
+        header {
+            background: linear-gradient(to right, #004e92, #000428);
+            padding: 30px 20px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        header h2 {
+            font-size: 30px;
+            font-weight: 600;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .result-box {
+            width: 100%;
+            max-width: 800px;
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .box-header {
+            background-color: #004e92;
+            color: white;
+            padding: 14px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 12px 12px 0 0;
+            margin: -40px -40px 30px -40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f0f8ff;
+            color: #004e92;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f5faff;
+        }
+        .message, .error {
+            text-align: center;
+            font-size: 16px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .message {
+            color: #0066cc;
+        }
+        .error {
+            color: red;
+            font-weight: 600;
+        }
+        .back-button {
+            margin-top: 30px;
+            padding: 12px 20px;
+            background: #004e92;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: #0066cc;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header> <h2>Giao Dịch Trung Bình</h2> </header>
+    <main>
+        <div class="result-box">
+            <div class="box-header">Danh sách tài khoản có giao dịch trung bình > 1 triệu đồng</div>
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% elif message %}
+                <div class="message">{{ message }}</div>
+            {% elif data %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã tài khoản</th>
+                            <th>Tên tài khoản</th>
+                            <th>Trung bình giao dịch</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ "{:,.0f}".format(row[2]) }} đ</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="message">Không có tài khoản nào có mức giao dịch trung bình trên 1 triệu đồng.</div>
+            {% endif %}
+            <div class="button-container">
+                <button class="back-button" onclick="window.location.href='/'">Quay lại trang chủ</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; 2025 Ngân hàng Taho. All rights reserved.
+    </footer>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập Nhật Tài Khoản</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f3faff, #ffffff);
+            min-height: 100vh;
+            color: #1a1a1a;
+        }
+        header {
+            background: linear-gradient(to right, #004e92, #000428);
+            padding: 30px 20px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-bottom: 20px; 
+        }
+        header h2 {
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .box {
+            background-color: #ffffff;
+            padding: 25px 20px;
+            width: 320px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px 12px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #fdfdfd;
+        }
+        select {
+            width: 325px;  /* Chiều rộng của ô chọn */
+            padding: 10px 12px;  /* Khoảng cách giữa nội dung và viền */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+        
+
+        button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background-color: #3498db;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .message, .error {
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .message {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        h3 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        td {
+            background-color: #fdfefe;
+            border: 1px solid #ddd;
+        }
+
+        tr:hover td {
+            background-color: #f0f8ff;
+        }
+
+        @media (max-width: 768px) {
+            .box {
+                width: 90%;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Cập Nhật Thông Tin Tài Khoản</h2>
+    </header>
+    <div class="container">
+        <div class="box">
+            <form method="POST">
+                <label for="MaTK">Nhập Mã Tài Khoản:</label>
+                <input type="text" id="MaTK" name="MaTK" value="{{ thong_tin.MaTK if thong_tin else '' }}" required>
+                <button type="submit" name="action" value="tim">Tìm</button>
+
+                {% if message and not thong_tin %}
+                <div class="message">{{ message }}</div>
+                {% elif error and not thong_tin %}
+                <div class="error">{{ error }}</div>
+                {% endif %}
+                <button type="button" onclick="window.location.href='/'">Quay về Trang Chủ</button>
+            </form>
+        </div>
+        {% if show_update_form and thong_tin %}
+        <div class="box">
+            <form method="POST">
+                <input type="hidden" name="MaTK" value="{{ thong_tin.MaTK }}">
+                <label for="TenTK">Tên Tài Khoản Mới:</label>
+                <input type="text" id="TenTK" name="TenTK" value="{{ thong_tin.TenTK }}" required>
+
+                <label for="LoaiTK">Loại Tài Khoản Mới:</label>
+                <select id="LoaiTK" name="LoaiTK" required>
+                    <option value="Tiết kiệm" {% if thong_tin.LoaiTK == 'TietKiem' %}selected{% endif %}>Tiết Kiệm</option>
+                    <option value="Thanh toán" {% if thong_tin.LoaiTK == 'ThanhToan' %}selected{% endif %}>Thanh Toán</option>
+                </select>
+                <button type="submit" name="action" value="capnhat">Cập Nhật</button>
+
+                {% if message %}
+                <div class="message">{{ message }}</div>
+                {% elif error %}
+                <div class="error">{{ error }}</div>
+                {% endif %}
+            </form>
+        </div>
+        {% endif %}
+        {% if show_update_form and danh_sach_tk %}
+        <div class="box">
+            <h3>Danh Sách Tài Khoản</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tên TK</th>
+                        <th>Loại TK</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tk in danh_sach_tk %}
+                    <tr>
+                        <td>{{ tk[1] }}</td>
+                        <td>{{ tk[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+    <footer>
+        &copy; 2025 Ngân hàng Taho. All rights reserved.
+    </footer>
+</body>
+</html>
