@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>Thống kê học viên</title></head>
+<body>
+    <h2>Thống kê cho học viên: {{ MaHV }}</h2>
+    <p>Số khóa đã đăng ký: <b>{{ so_khoa }}</b></p>
+    <p>Tổng tiền đã thanh toán: <b>{{ tong_tien }}</b> VNĐ</p>
+    <h3>Các khóa đã học xong:</h3>
+    <ul>
+        {% for kh in da_hoc_xong %}
+            <li>{{ kh }}</li>
+        {% endfor %}
+    </ul>
+    <form method="get">
+        <label>Nhập mã học viên:</label>
+        <input type="text" name="MaHV">
+        <button type="submit">Xem</button>
+    </form>
+</body>
+</html>

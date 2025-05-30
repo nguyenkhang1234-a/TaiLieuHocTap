@@ -1,0 +1,10 @@
+Điểm bắt đầu: A, Điểm kết thúc: G
+Phát triển TT  Trạng thái kề       Danh sách Q                   Danh sách L
+                                                                 A
+A              B,C,D               A,B,C,D                       B,C,D
+B              I,G                 A,B,C,D,G,I                   C,D,I,G
+C              E,F                 A,B,C,D,E,F,G,I               D,I,G,E,F
+D              C,F                 A,B,C,D,E,F,G,I               I,G,E,F
+I              G                   A,B,C,D,E,F,G,I               G,E,F
+G              TTKT -> Dừng                  
+Đường đi từ điểm bắt đầu đến điểm kết thúc: A -> B -> G

@@ -9,17 +9,17 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f3faff, #ffffff);
+            background: linear-gradient(135deg, #fce4ec, #ffffff);
             min-height: 100vh;
             color: #1a1a1a;
             padding: 20px;
         }
         header {
-            background: linear-gradient(to right, #004e92, #000428);
+            background: linear-gradient(to right, #f8a5c2, #fce4ec);
             padding: 30px 20px;
             text-align: center;
-            color: #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            color: #6b2f48;
+            box-shadow: 0 4px 10px rgba(107,47,72,0.2);
         }
         header h2 {
             font-size: 30px;
@@ -35,9 +35,9 @@
         }
         .search-column, .result-column {
             padding: 20px;
-            background: #f9f9f9;
+            background: #fff0f5;
             border-radius: 16px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(107,47,72,0.1);
         }
         .search-column {
             width: 30%;
@@ -54,17 +54,18 @@
             padding: 10px;
             width: 100%;
             border-radius: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #f8bbd0;
             margin-bottom: 20px;
             transition: border-color 0.3s ease;
         }
         input[type="text"]:focus {
-            border-color: #004e92;
+            border-color: #f06292;
+            outline: none;
         }
         button {
             padding: 10px 20px;
             font-size: 16px;
-            background: #004e92;
+            background: #f06292;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -73,7 +74,8 @@
             transition: background 0.3s;
         }
         button:hover {
-            background: #0066cc;
+            background: #f8bbd0;
+            color: #6b2f48;
         }
         table {
             width: 100%;
@@ -85,15 +87,15 @@
         th, td {
             padding: 12px 16px;
             text-align: left;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #f8bbd0;
         }
         th {
-            background: #004e92;
+            background: #f06292;
             color: #fff;
             font-weight: 600;
         }
         td {
-            background: #f9f9f9;
+            background: #fff0f5;
         }
         .message, .error {
             margin-top: 20px;
@@ -102,10 +104,10 @@
             font-weight: 600;
         }
         .message {
-            color: #28a745;
+            color: #c56a7b;
         }
         .error {
-            color: #dc3545;
+            color: #e57373;
         }
         @media (max-width: 768px) {
             main {
@@ -118,18 +120,43 @@
         }
         .button-container {
             display: flex;
-            gap: 15px;  /* Tạo khoảng cách giữa các nút */
-            margin-top: 10px;  /* Khoảng cách trên các nút */
+            justify-content: center;  /* căn giữa ngang */
+            gap: 12px;                /* khoảng cách giữa 2 button */
+            width: 100%;
+        }        
+        header h1 {
+            font-size: 36px;
+            font-weight: 600;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #aa647b;
+        }
+        .branch-form {
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .branch-form input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            margin-bottom: 16px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h2>Thống Kê Giao Dịch Từng Chi Nhánh</h2>
+    <header style="display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <img src="static/images/branch.png" alt="System Icon" 
+            style="width: 60px; height: 60px; margin-right: 12px;">
+        <h1 style="margin: 0;">THÔNG TIN GIAO DỊCH TỪNG CHI NHÁNH</h1>
     </header>
     <main>
         <div class="search-column">
-            <form method="POST" action="/chinhanh">
+            <form method="POST" action="/chinhanh" class="branch-form">
                 <input type="text" id="MaCN" name="MaCN" placeholder="Nhập mã chi nhánh" required>
                 
                 <div class="button-container">
@@ -137,7 +164,6 @@
                     <button type="button" onclick="window.location.href='/'">Quay về Trang Chủ</button>
                 </div>
             </form>
-
             {% if error %}
             <div class="error">
                 <p>{{ error }}</p>
@@ -150,11 +176,11 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Mã GD</th>
-                        <th>Mã TK</th>
+                        <th>Mã Giao dịch</th>
+                        <th>Mã tài khoản</th>
                         <th>Số Tiền</th>
-                        <th>Loại GD</th>
-                        <th>Ngày GD</th>
+                        <th>Loại Giao dịch</th>
+                        <th>Ngày Giao dịch</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -172,5 +198,8 @@
             {% endif %}
         </div>
     </main>
+    <footer>
+        &copy; 2025 Ngân hàng Taho. All rights reserved.
+    </footer>
 </body>
 </html>

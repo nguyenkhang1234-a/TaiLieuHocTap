@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Học viên thanh toán > 5 triệu</title></head>
+<body>
+    <h2>Danh sách học viên có tổng tiền thanh toán trên 5 triệu</h2>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Mã HV</th>
+            <th>Tên học viên</th>
+            <th>Tổng tiền</th>
+        </tr>
+        {% for hv in hocviens %}
+        <tr>
+            <td>{{ hv[0] }}</td>
+            <td>{{ hv[1] }}</td>
+            <td>{{ hv[2] }} VNĐ</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

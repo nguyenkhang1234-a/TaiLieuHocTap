@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cập nhật trạng thái</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fce4ec, #ffffff);
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+    background: linear-gradient(to right, #f8a5c2, #fce4ec);
+    padding: 20px;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative; /* quan trọng để nút absolute */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* vẫn căn giữa logo và title */
+}
+.menu-toggle {
+    position: absolute !important;
+    left: 20px !important;
+    top: 20px !important;
+    transform: none !important;
+    font-size: 30px;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    z-index: 1001;
+}
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0;
+        }
+        header img {
+            width: 48px;
+            height: 48px;
+            margin-right: 12px;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .card {
+            background: #fff0f5;
+            border-radius: 16px;
+            padding: 40px 50px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            width: 400px;
+            text-align: center;
+        }
+        .card h2 {
+            margin-bottom: 25px;
+            color: #e91e63;
+            font-weight: 600;
+            font-size: 24px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block;
+            color: #333;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e91e63;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #ec407a;
+            box-shadow: 0 0 8px #ec407a;
+        }
+        button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 0;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #c2185b;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #aa647b;
+            background: #fff0f5;
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            background-color: #fff0f5;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            box-shadow: 2px 0 12px rgba(0,0,0,0.2);
+        }
+        .sidebar a {
+            padding: 12px 24px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #e91e63;
+            display: block;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        .sidebar a:hover {
+            background-color: #f8a5c2;
+            color: white;
+        }
+        .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 30px;
+            color: #e91e63;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 450px) {
+            .card {
+                width: 90%;
+                padding: 30px 20px;
+            }
+            header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
+    <a href="/"> Trang chủ</a>
+    <a href="/thongke?MaHV=HV01">📊 Thống kê học viên</a>
+    <a href="/dangky">📝 Đăng ký khóa học</a>
+    <a href="/capnhat">🔄 Cập nhật trạng thái học</a>
+    <a href="/thanhtoan">💰 Thêm thanh toán</a>
+    <a href="/xoathanhtoan">❌ Xóa thanh toán</a>
+    <a href="/lietke">📋 Liệt kê học viên &gt; 5 triệu</a>
+</div>
+
+<header>
+<button class="menu-toggle" onclick="openSidebar()">&#9776;</button>
+  <img src="static/images/course.png" alt="Course Icon" />
+  <h1>HỆ THỐNG ĐĂNG KÝ KHÓA HỌC</h1>
+</header>
+
+<main>
+    <div class="card">
+        <h2>Cập nhật trạng thái học của học viên</h2>
+        <form method="post">
+            <label for="MaDK">Mã ĐK:</label>
+            <input type="text" id="MaDK" name="MaDK" required />
+
+            <label for="TrangThai">Trạng thái:</label>
+            <select id="TrangThai" name="TrangThai" required>
+                <option value="0">Chưa học</option>
+                <option value="1">Đang học</option>
+                <option value="2">Đã học xong</option>
+            </select>
+
+            <button type="submit">Cập nhật</button>
+        </form>
+    </div>
+</main>
+
+<footer>
+    &copy; 2025 Hệ thống đăng ký khóa học. All rights reserved.
+</footer>
+
+<script>
+    function openSidebar() {
+        document.getElementById("sidebar").style.width = "250px";
+    }
+    function closeSidebar() {
+        document.getElementById("sidebar").style.width = "0";
+    }
+</script>
+
+</body>
+</html>

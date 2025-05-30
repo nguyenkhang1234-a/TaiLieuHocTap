@@ -8,12 +8,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f3faff, #ffffff);
+            background: linear-gradient(135deg, #fce4ec, #ffffff);
             min-height: 100vh;
             color: #1a1a1a;
         }
         header {
-            background: linear-gradient(to right, #004e92, #000428);
+            background: linear-gradient(to right, #f8a5c2, #fce4ec);
             padding: 30px 20px;
             text-align: center;
             color: #fff;
@@ -27,12 +27,12 @@
         main {
             max-width: 600px;
             margin: 50px auto;
-            background: #fff;
+            background: #fff0f5;
             border-radius: 16px;
             padding: 40px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            height: 340px; /* Đặt chiều cao cố định */
-            overflow-y: auto; /* Thêm cuộn dọc khi nội dung vượt quá chiều cao */
+            height: 630px;
+            overflow-y: auto; 
         }
         form {
             display: flex;
@@ -43,7 +43,7 @@
             padding: 12px 16px;
             font-size: 16px;
             border-radius: 8px;
-            border: 1px solid #ccc;
+            border: 1px solid #f8bbd0;
         }
         .form-buttons {
             display: flex;
@@ -57,7 +57,7 @@
         button {
             padding: 12px;
             font-size: 16px;
-            background: #004e92;
+            background: #e91e63;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -66,32 +66,38 @@
             transition: background 0.3s;
         }
         button:hover {
-            background: #0066cc;
+            background: #f48fb1;
         }
         .message {
             margin-top: 20px;
             text-align: center;
             font-size: 18px;
-            color: #004e92;
+            color: #e91e63;
             font-weight: 600;
         }
         footer {
             text-align: center;
             padding: 20px;
             font-size: 14px;
-            color: #777;
+            color: #aa647b;
         }
         @media (max-width: 500px) {
             main {
                 margin: 20px;
                 padding: 25px;
             }
+        }        
+        header h1 {
+            font-size: 36px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h2>💳 Thêm Giao dịch mới</h2>
+    <header style="display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <img src="static/images/new.png" alt="System Icon" 
+            style="width: 60px; height: 60px; margin-right: 12px;">
+        <h1 style="margin: 0;">THÊM GIAO DỊCH MỚI</h1>
     </header>
     <main>
         <form method="post">
@@ -108,7 +114,7 @@
             <input type="number" name="LoaiGD" id="LoaiGD" min="1" max="3" required placeholder="Ví dụ: 1">
             
             <label for="SoTien">Nhập số tiền (>1000)</label>
-            <input type="number" name="SoTien" id="SoTien" min="1000" required placeholder="Số tiền">
+            <input type="number" name="SoTien" id="SoTien" min="10000" step="10000" required placeholder="Số tiền">
             
             <label for="NgayGD">Nhập ngày giao dịch</label>
             <input type="date" name="NgayGD" id="NgayGD" required>

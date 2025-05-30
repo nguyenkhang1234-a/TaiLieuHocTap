@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <title>Tìm kiếm Giảng viên</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(90deg, #ffe4ec 0%, #ffd1db 100%);
+            margin: 0;
+            color: #a94a6b; /* hồng nhẹ, không quá đậm */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #f4a6b9; /* hồng pastel đậm vừa phải */
+            color: #fff;
+            padding: 15px 30px;
+            text-align: center;
+            font-weight: 700;
+            box-shadow: 0 2px 5px rgba(244, 166, 185, 0.5);
+        }
+        footer {
+            background: #f4a6b9;
+            color: #fff;
+            padding: 15px 30px;
+            text-align: right;
+            font-weight: 700;
+            box-shadow: 0 2px 5px rgba(244, 166, 185, 0.5);
+        }
+        main {
+            flex-grow: 1;
+            max-width: 1600px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Khung bên trái - tìm kiếm */
+        .search-panel {
+            height: 320px;
+            width: 380px;
+            background: #ffe8ef; /* hồng phấn nhạt */
+            padding: 25px 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px #f7b3c1aa;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+        }
+        .search-panel h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: #d47d94; /* hồng pastel trung bình */
+            text-shadow: 1px 1px 2px #f8c9d2;
+        }
+        form {
+            display: flex;
+            gap: 12px;
+        }
+        input[name="bomon"] {
+            flex-grow: 1;
+            padding: 12px 18px;
+            font-size: 16px;
+            border: 2px solid #f7b3c1;
+            border-radius: 12px;
+            background: #fff0f4; /* hồng rất nhạt */
+            color: #a94a6b;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[name="bomon"]:focus {
+            outline: none;
+            border-color: #d47d94;
+            box-shadow: 0 0 8px #d47d94aa;
+            background: #fff4f8;
+        }
+        button {
+            background: #d47d94;
+            border: none;
+            color: white;
+            padding: 13px 28px;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 8px #c16b7dcc;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background: #c16b7d;
+        }
+        /* Khung bên phải - kết quả */
+        .result-panel {
+            flex: 1;
+            background: #fff4f8; /* hồng rất nhạt */
+            padding: 25px 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px #f7b3c1aa;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            overflow-x: auto;
+        }
+        .result-panel h3 {
+            margin-top: 0;
+            margin-bottom: 18px;
+            color: #d47d94;
+            font-weight: 700;
+            text-shadow: 1px 1px 1px #f8c9d2;
+            text-align: left;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid #f9d2dd;
+            color: #a94a6b;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        th {
+            background: #f7b3c1;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        tr:hover {
+            background: #ffe4ec;
+        }
+        /* Thông báo không tìm thấy */
+        .no-result {
+            color: #d47d94;
+            font-weight: 600;
+            font-size: 1.1em;
+            text-align: center;
+            margin-top: 40px;
+        }
+        /* Ẩn khung kết quả khi không có dữ liệu */
+        .result-panel.hidden {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            main {
+                flex-direction: column;
+            }
+            .result-panel {
+                margin-top: 30px;
+                overflow-x: auto;
+            }
+        }
+        .message {
+            margin-top: 20px;
+            color: #d47d94;
+            font-weight: 600;
+            font-size: 1em;
+            text-align: center;
+            background: linear-gradient(90deg, #ffe4ec 0%, #ffd1db 100%);
+            padding: 10px 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px #f7b3c1aa;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HỆ THỐNG TÌM KIẾM GIẢNG VIÊN</h1>
+    </header>
+
+    <main>
+        <section class="search-panel">
+            <h2 style="text-align: center">Tìm kiếm Giảng viên theo tên Bộ môn gần đúng</h2>
+            <form method="POST">
+                <input list="bomon-list" name="bomon" placeholder="Nhập tên bộ môn..." value="{{ search_term|default('') }}" autocomplete="off" />
+                <datalist id="bomon-list">
+                    {% for ma, ten in ds_bomon %}
+                        <option value="{{ ten }}"></option>
+                    {% endfor %}
+                </datalist>
+                <button type="submit">Tìm</button>
+            </form>
+            {% if search_term is none or search_term|trim == '' %}
+                <p class="message">Vui lòng nhập tên bộ môn để tìm kiếm.</p>
+            {% elif search_term and not result %}
+                <p class="message">Không tìm thấy kết quả nào.</p>
+            {% endif %}
+        </section>
+
+
+        <section class="result-panel {% if not result %}hidden{% endif %}">
+            {% if result %}
+                <h3>Kết quả tìm kiếm:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã Giảng viên</th><th>Tên Giảng viên</th><th>Bộ môn</th><th>Giới tính</th><th>Địa chỉ</th><th>Số điện thoại</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for gv in result %}
+                        <tr>
+                            <td>{{ gv.MaGV }}</td>
+                            <td>{{ gv.TenGV }}</td>
+                            <td>{{ gv.BoMon }}</td>
+                            <td>{{ gv.GioiTinh }}</td>
+                            <td>{{ gv.DiaChi }}</td>
+                            <td>{{ gv.SoDT }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% elif search_term %}
+                <p class="no-result">Không tìm thấy kết quả nào.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 - Bản quyền thuộc về Taho
+    </footer>
+</body>
+</html>

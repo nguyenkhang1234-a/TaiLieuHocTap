@@ -8,16 +8,16 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f3faff, #ffffff);
+            background: linear-gradient(135deg, #fce4ec, #ffffff); /* nền hồng pastel */
             min-height: 100vh;
-            color: #1a1a1a;
+            color: #4a154b; /* màu chữ hơi tím để hợp với hồng */
         }
         header {
-            background: linear-gradient(to right, #004e92, #000428);
+            background: linear-gradient(to right, #f8a5c2, #fce4ec); /* hồng pastel */
             padding: 30px 20px;
             text-align: center;
             color: #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
         header h2 {
@@ -39,7 +39,7 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
         .box-header {
-            background-color: #004e92;
+            background-color: #f48fb1; /* hồng đậm vừa */
             color: white;
             padding: 14px;
             font-size: 18px;
@@ -55,15 +55,15 @@
         th, td {
             text-align: left;
             padding: 12px 16px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #f8bbd0;
         }
         th {
-            background-color: #f0f8ff;
-            color: #004e92;
+            background-color: #fce4ec;
+            color: #c2185b;
             font-weight: 600;
         }
         tr:hover {
-            background-color: #f5faff;
+            background-color: #fff0f5;
         }
         .message, .error {
             text-align: center;
@@ -72,16 +72,16 @@
             margin-top: 20px;
         }
         .message {
-            color: #0066cc;
+            color: #d81b60;
         }
         .error {
-            color: red;
+            color: #b00020;
             font-weight: 600;
         }
         .back-button {
             margin-top: 30px;
             padding: 12px 20px;
-            background: #004e92;
+            background: #f06292;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -90,7 +90,7 @@
             transition: background 0.3s;
         }
         .back-button:hover {
-            background: #0066cc;
+            background: #ec407a;
         }
         .button-container {
             display: flex;
@@ -101,12 +101,20 @@
             text-align: center;
             padding: 20px;
             font-size: 14px;
-            color: #777;
+            color: #aa647b;
+        }        
+        header h1 {
+            font-size: 36px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
-    <header> <h2>Giao Dịch Trung Bình</h2> </header>
+    <header style="display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <img src="static/images/chart.png" alt="System Icon" 
+            style="width: 60px; height: 60px; margin-right: 12px;">
+        <h1 style="margin: 0;">THÔNG TIN GIAO DỊCH</h1>
+    </header>
     <main>
         <div class="result-box">
             <div class="box-header">Danh sách tài khoản có giao dịch trung bình > 1 triệu đồng</div>

@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Trang chủ - Hệ thống Ngân hàng</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <title>Trang chủ - Hệ thống đăng ký khóa học</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0; padding: 0; box-sizing: border-box;
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -30,6 +28,7 @@
         header h1 {
             font-size: 36px;
             font-weight: 600;
+            margin: 0;
         }
         main {
             padding: 50px 20px;
@@ -81,19 +80,14 @@
             header h1 {
                 font-size: 28px;
             }
+            .menu {
+                grid-template-columns: 1fr;
+                max-width: 90%;
+            }
+            .card {
+                width: 100%;
+            }
         }
-        .logo-icon {
-            width: 64px;
-            height: 64px;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-        .menu-icon {
-            width: 55px;
-            height: 55px;
-        }
-
-        /* --- THÊM: CSS sidebar và icon --- */
         .menu-toggle {
             font-size: 30px;
             cursor: pointer;
@@ -107,7 +101,6 @@
             transform: translateY(-50%);
             z-index: 1001;
         }
-
         .sidebar {
             height: 100%;
             width: 0;
@@ -121,7 +114,6 @@
             padding-top: 60px;
             box-shadow: 2px 0 12px rgba(0,0,0,0.2);
         }
-
         .sidebar a {
             padding: 12px 24px;
             text-decoration: none;
@@ -131,12 +123,10 @@
             transition: 0.3s;
             font-weight: 600;
         }
-
         .sidebar a:hover {
             background-color: #f8a5c2;
             color: white;
         }
-
         .close-btn {
             position: absolute;
             top: 16px;
@@ -145,63 +135,79 @@
             color: #e91e63;
             text-decoration: none;
         }
+        .menu-icon {
+            width: 55px;
+            height: 55px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- THÊM: Sidebar -->
+    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="closeSidebar()">&times;</a>
-        <a href="/them_chinhanh">Thêm Chi Nhánh</a>
-        <a href="/them_taikhoan">Thêm Tài Khoản</a>
+        <!-- Bạn có thể thêm các mục sidebar nếu muốn -->
+        <a href="/dashboard">Trang chính</a>
+        <a href="/quanlyhocvien">Quản lý học viên</a>
+        <a href="/quanlykhoahoc">Quản lý khóa học</a>
     </div>
 
     <header>
-        <!-- Nút menu gắn vào header -->
         <button class="menu-toggle" onclick="openSidebar()">&#9776;</button>
-        <img src="static/images/system.png" alt="System Icon" style="width: 64px; height: 64px; margin-right: 12px;">
-        <h1 style="margin: 0;">HỆ THỐNG QUẢN LÝ NGÂN HÀNG</h1>
+        <img src="static/images/course.png" alt="Course Icon" style="width: 64px; height: 64px; margin-right: 12px;">
+        <h1>HỆ THỐNG ĐĂNG KÝ KHÓA HỌC</h1>
     </header>
 
     <main>
         <div class="menu">
             <div class="card">
-                <div class="icon"><img src="static/images/search.png" alt="Search Icon" class="menu-icon"></div>
-                <a href="/taikhoan">Xem Thông Tin Tài Khoản</a>
+                <div class="icon">
+                    <img src="static/images/statistics.png" alt="Statistics Icon" class="menu-icon" />
+                </div>
+                <a href="/thongke?MaHV=HV01">📊 Thống kê học viên</a>
             </div>
             <div class="card">
-                <div class="icon"><img src="static/images/new.png" alt="Money Icon" class="menu-icon"></div>
-                <a href="/giaodich">Thêm Giao Dịch</a>
+                <div class="icon">
+                    <img src="static/images/register.png" alt="Register Icon" class="menu-icon" />
+                </div>
+                <a href="/dangky">📝 Đăng ký khóa học</a>
             </div>
             <div class="card">
-                <div class="icon"><img src="static/images/delete.png" alt="Document Icon" class="menu-icon"></div>
-                <a href="/phatsinh">Xóa Thông Tin Phát Sinh</a>
+                <div class="icon">
+                    <img src="static/images/update.png" alt="Update Icon" class="menu-icon" />
+                </div>
+                <a href="/capnhat">🔄 Cập nhật trạng thái học</a>
             </div>
             <div class="card">
-                <div class="icon"><img src="static/images/branch.png" alt="Branch Icon" class="menu-icon"></div>
-                <a href="/chinhanh">Chi Nhánh</a>
+                <div class="icon">
+                    <img src="static/images/payment_add.png" alt="Add Payment Icon" class="menu-icon" />
+                </div>
+                <a href="/thanhtoan">💰 Thêm thanh toán</a>
             </div>
             <div class="card">
-                <div class="icon"><img src="static/images/update.png" alt="Refresh Icon" class="menu-icon"></div>
-                <a href="/capnhat">Cập Nhật Thông Tin</a>
+                <div class="icon">
+                    <img src="static/images/payment_delete.png" alt="Delete Payment Icon" class="menu-icon" />
+                </div>
+                <a href="/xoathanhtoan">❌ Xóa thanh toán</a>
             </div>
             <div class="card">
-                <div class="icon"><img src="static/images/chart.png" alt="Chart Icon" class="menu-icon"></div>
-                <a href="/trungbinhcao">Giao Dịch Trung Bình</a>
+                <div class="icon">
+                    <img src="static/images/list.png" alt="List Icon" class="menu-icon" />
+                </div>
+                <a href="/lietke">📋 Liệt kê học viên &gt; 5 triệu</a>
             </div>
         </div>
     </main>
 
     <footer>
-        &copy; 2025 Ngân hàng Taho. All rights reserved.
+        &copy; 2025 Hệ thống đăng ký khóa học. All rights reserved.
     </footer>
 
-    <!-- THÊM: JavaScript mở/đóng sidebar -->
     <script>
         function openSidebar() {
             document.getElementById("sidebar").style.width = "250px";
         }
-
         function closeSidebar() {
             document.getElementById("sidebar").style.width = "0";
         }
